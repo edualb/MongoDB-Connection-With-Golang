@@ -2,9 +2,9 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"./DAO"
-	"./connection"
 )
 
 // instead of `c := connection.ConnectData{Server: "localhost:27017", Database: "CRUDGolang"}`, You can use:
@@ -12,7 +12,7 @@ import (
 // c.Server = "localhost:27017" <- set your Server
 // c.Database = "CRUDGolang" <- set your Database
 func init() {
-	c := connection.ConnectData{Server: "localhost:27017", Database: "CRUDGolang"}
+	c := dao.ConnectData{Server: "localhost:27017", Database: "CRUDGolang"}
 	_, err := c.Connect()
 	if err != nil {
 		log.Fatal(err)
@@ -21,8 +21,9 @@ func init() {
 
 func main() {
 	// Create a Profile
-	profile := new(DAO.ProfileDAO)
-	profile.Name = "Edualb"
+	profile := new(dao.Profile)
+	profile.Name = "Edualb test"
 	profile.Phone = "+55 55 955555555"
+	profile.Date = time.Now()
 	profile.Create()
 }

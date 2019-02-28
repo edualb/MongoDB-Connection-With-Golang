@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -22,8 +23,14 @@ func init() {
 func main() {
 	// Create a Profile
 	profile := new(dao.Profile)
-	profile.Name = "Edualb test"
+	profile.Name = "Edualb test2"
 	profile.Phone = "+55 55 955555555"
 	profile.Date = time.Now()
 	profile.Create()
+	// Get All profile
+	var ProfileDAO = dao.Profile{}
+	profiles, _ := ProfileDAO.GetAll()
+	for _, p := range profiles {
+		fmt.Println(p)
+	}
 }

@@ -27,10 +27,17 @@ func main() {
 	profile.Phone = "+55 55 955555555"
 	profile.Date = time.Now()
 	profile.Create()
+
 	// Get All profile
 	var ProfileDAO = dao.Profile{}
 	profiles, _ := ProfileDAO.GetAll()
+	fmt.Println("Get All:")
 	for _, p := range profiles {
 		fmt.Println(p)
 	}
+
+	// Get an only Profile
+	profileOne, _ := ProfileDAO.Get("5c787a955fcd7a83b7bc8f08")
+	fmt.Println("Get a only Profile:")
+	fmt.Println(profileOne)
 }

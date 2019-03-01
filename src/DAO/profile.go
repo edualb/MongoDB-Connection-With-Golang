@@ -39,12 +39,30 @@ func (p *Profile) GetAll() ([]Profile, error) {
 	return profiles, err
 }
 
-// Get get only Profile document
-func (p *Profile) Get(id string) (Profile, error) {
+// GetByID get only Profile document
+func (p *Profile) GetByID(id string) (Profile, error) {
 	var profile Profile
 	err := Db.C(collection).Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&profile)
 	if err != nil {
 		return profile, fmt.Errorf("Error to get only Profile: %v", err)
 	}
 	return profile, err
+}
+
+// Update the p (Profile) to other profile (Profile)
+func (p *Profile) Update(profile *Profile) error {
+	err := Db.C(collection).Update(p, profile)
+	if err != nil {
+		return fmt.Errorf("Error to update Profile: %v", err)
+	}
+	return err
+}
+
+// UpdateByID update the Profile with its id by p (Profile)
+func (p *Profile) UpdateByID(id string) error {
+	err := Db.C(collection).UpdateId(bson.ObjectIdHex(id), p)
+	if err != nil {
+		return fmt.Errorf("Error to update by id Profile: %v", err)
+	}
+	return err
 }

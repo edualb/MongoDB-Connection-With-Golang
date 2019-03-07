@@ -52,4 +52,7 @@ func main() {
 	profileOne, _ = ProfileDAO.GetByID("5c787a955fcd7a83b7bc8f08")
 	fmt.Println("Updated profile")
 	fmt.Println(profileOne)
+
+	// Delete a Profile by ID
+	// ProfileDAO.DeleteByID("5c788c845fcd7a83b7bc8f58")
 }

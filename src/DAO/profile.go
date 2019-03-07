@@ -42,6 +42,8 @@ func (p *Profile) GetAll() ([]Profile, error) {
 // GetByID get only Profile document
 func (p *Profile) GetByID(id string) (Profile, error) {
 	var profile Profile
+	// You can use:
+	// err := Db.C(collection).FindId(bson.ObjectIdHex(id)).One(&profile)
 	err := Db.C(collection).Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&profile)
 	if err != nil {
 		return profile, fmt.Errorf("Error to get only Profile: %v", err)
@@ -63,6 +65,15 @@ func (p *Profile) UpdateByID(id string) error {
 	err := Db.C(collection).UpdateId(bson.ObjectIdHex(id), p)
 	if err != nil {
 		return fmt.Errorf("Error to update by id Profile: %v", err)
+	}
+	return err
+}
+
+// DeleteByID delete a Profile by ID
+func (p *Profile) DeleteByID(id string) error {
+	err := Db.C(collection).RemoveId(bson.ObjectIdHex(id))
+	if err != nil {
+		return fmt.Errorf("Error to delete by id Profile: %v", err)
 	}
 	return err
 }
